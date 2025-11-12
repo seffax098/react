@@ -1,5 +1,3 @@
-https://seffax098.github.io/react/blob/master/public/index.html
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
