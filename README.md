@@ -1,4 +1,4 @@
-https://github.com/seffax098/react/blob/master/public/index.html
+https://seffax098.github.io/react/blob/master/public/index.html
 
 # Getting Started with Create React App
 
