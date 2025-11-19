@@ -1,7 +1,8 @@
 import React from "react";
 import "./TechnologyCard.css";
+import TechnologyNotes from "./TechnologyNotes";
 
-function TechnologyCard({ title, description, status = "not-started", onStatusChange }) {
+function TechnologyCard({ id, title, description, status = "not-started", notes = "", onStatusChange, onNotesChange }) {
     const next = status === "not-started" ? "in-progress" :
         status === "in-progress" ? "completed" :
             "not-started";
@@ -16,8 +17,13 @@ function TechnologyCard({ title, description, status = "not-started", onStatusCh
                     Изменить статус
                 </button>
             </div>
+            <TechnologyNotes 
+                notes={notes}
+                techId={id}
+                onNotesChange={onNotesChange}
+            />
         </div>
     );
 }
-
+ 
 export default TechnologyCard;

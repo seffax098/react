@@ -47,3 +47,17 @@
     gap: 16px;
     margin-top: 12px;
 }
+
+.search-box {
+    display: grid;
+    gap: 6px;
+}
+
+.search-box input {
+    width: 100%;
+    resize: vertical;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font: inherit;
+}

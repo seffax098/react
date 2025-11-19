@@ -9,15 +9,30 @@ const OPTIONS = [
 ];
 
 export default function Filters({ items = [], renderItem }) {
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredTechnologies = items.filter(tech =>
+        tech.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tech.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     const [active, setActive] = useState("all");
 
-    const filtered = items.filter(t =>
+    const filtered = filteredTechnologies.filter(t =>
         active === "all" ? true : t.status === active
     );
 
     return (
         <div className="filters">
-            {/* Кнопки фильтров */}
+            <div className="search-box">
+                <input
+                    type="text"
+                    placeholder="Поиск технологий..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <span>Найдено: {filteredTechnologies.length}</span>
+            </div>
             <div className="filters__tabs" role="tablist" aria-label="Фильтр технологий">
                 {OPTIONS.map(opt => {
                     const isActive = active === opt.value;
@@ -36,7 +51,6 @@ export default function Filters({ items = [], renderItem }) {
                 })}
             </div>
 
-            {/* Отфильтрованный список */}
             <div className="filters__list">
                 {filtered.map(item => renderItem(item))}
             </div>

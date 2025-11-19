@@ -1,40 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import TechnologyCard from "./components/TechnologyCard";
 import ProgressHeader from "./components/ProgressHeader";
 import QuickActions from "./components/QuickActions";
 import Filters from "./components/Filters";
+import useTechnologies from './useTechnologies';
 
 function App() {
-    const [technologies, setTechnologies] = useState([
-        {
-            id: 1,
-            title: 'React Components',
-            description: 'Изучение базовых компонентов',
-            status: 'not-started'
-        },
-        {
-            id: 2,
-            title: 'JSX Syntax',
-            description: 'Освоение синтаксиса JSX',
-            status: 'not-started'
-        },
-        {
-            id: 3,
-            title: 'State Management',
-            description: 'Работа с состоянием компонентов',
-            status: 'not-started'
-        }
-    ]);
-
-    function changeStatus(id, nextStatus) {
-        setTechnologies(prev =>
-            prev.map(t =>
-                t.id === id ? { ...t, status: nextStatus } : t
-            )
-        );
-    }
-
+    const { technologies, updateStatus, updateNotes, setTechnologies } = useTechnologies();
 
     return (
         <div className="container">
@@ -54,11 +27,14 @@ function App() {
                     items={technologies}
                     renderItem={(t) => (
                         <TechnologyCard
+                            id={t.id}
                             key={t.id}
                             title={t.title}
                             description={t.description}
                             status={t.status}
-                            onStatusChange={(next) => changeStatus(t.id, next)}
+                            notes={t.notes}
+                            onStatusChange={(next) => updateStatus(t.id, next)}
+                            onNotesChange={updateNotes}
                         />
                     )}
                 />
