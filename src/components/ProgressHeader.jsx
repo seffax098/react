@@ -1,10 +1,20 @@
+import { useEffect, useState } from "react";
 import "./ProgressHeader.css";
 
-function ProgressHeader({ items = [] }) {
-    const total = items.length;
-    const completed = items.filter(i => i.status === "completed").length;
-    const inProgress = items.filter(i => i.status === "in-progress").length;
-    const notStarted = items.filter(i => i.status === "not-started").length;
+function ProgressHeader() {
+    const [technologies, setTechnologies] = useState([]);
+
+    useEffect(() => {
+        const saved = localStorage.getItem('technologies');
+        if (saved) {
+            setTechnologies(JSON.parse(saved));
+        }
+    }, []);
+
+    const total = technologies.length;
+    const completed = technologies.filter(i => i.status === "completed").length;
+    const inProgress = technologies.filter(i => i.status === "in-progress").length;
+    const notStarted = technologies.filter(i => i.status === "not-started").length;
 
 
     const percent = total > 0 ? Math.round((completed / total) * 100) : 0;

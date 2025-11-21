@@ -39,7 +39,7 @@ function QuickActions({ setTechnologies }) {
 
             URL.revokeObjectURL(url);
 
-            return prev;  // важно: НЕ меняем состояние
+            return prev;  
         });
     }
 
