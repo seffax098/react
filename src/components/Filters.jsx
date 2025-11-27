@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Filters.css";
+import TechnologyCard from "./TechnologyCard";
 
 const OPTIONS = [
     { value: "all", label: "Все" },
@@ -8,17 +9,25 @@ const OPTIONS = [
     { value: "completed", label: "Выполнено" },
 ];
 
-export default function Filters({ items = [], renderItem }) {
+export default function Filters({ items = [], onStatusChange, onNotesChange }) {
     const [searchQuery, setSearchQuery] = useState('');
-
-    const filteredTechnologies = items.filter(tech =>
-        tech.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tech.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
+    const [debouncedQuery, setDebouncedQuery] = useState('');
     const [active, setActive] = useState("all");
 
-    const filtered = filteredTechnologies.filter(t =>
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedQuery(searchQuery);
+        }, 300); 
+        
+        return () => clearTimeout(handler);
+    }, [searchQuery]);
+
+    const filteredBySearch = items.filter(tech =>
+        tech.title.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+        tech.description.toLowerCase().includes(debouncedQuery.toLowerCase())
+    );
+
+    const filtered = filteredBySearch.filter(t =>
         active === "all" ? true : t.status === active
     );
 
@@ -31,9 +40,14 @@ export default function Filters({ items = [], renderItem }) {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <span>Найдено: {filteredTechnologies.length}</span>
+                <span>Найдено: {filtered.length}</span>
             </div>
-            <div className="filters__tabs" role="tablist" aria-label="Фильтр технологий">
+
+            <div
+                className="filters__tabs"
+                role="tablist"
+                aria-label="Фильтр технологий"
+            >
                 {OPTIONS.map(opt => {
                     const isActive = active === opt.value;
                     return (
@@ -52,7 +66,11 @@ export default function Filters({ items = [], renderItem }) {
             </div>
 
             <div className="filters__list">
-                {filtered.map(item => renderItem(item))}
+                <TechnologyCard 
+                technologies={filtered} 
+                onStatusChange={onStatusChange}
+                onNotesChange={onNotesChange}
+                />
             </div>
         </div>
     );

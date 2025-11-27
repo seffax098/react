@@ -1,53 +1,54 @@
 import { Link, useLocation } from 'react-router-dom';
+import "./Navigation.css";
 
 function Navigation() {
     const location = useLocation();
 
     return (
         <nav className="main-navigation">
-            <div className="nav-brand">
-                <Link to="/">
-                    <h2>🚀 Трекер технологий</h2>
+            <div className="nav__logo">
+                <Link to="/" className="logo__link">
+                    <h1 className="logo">Трекер технологий</h1>
                 </Link>
             </div>
 
-            <ul className="nav-menu">
-                <li>
+            <ul className="nav__list">
+                <li className={location.pathname === '/' ? 'nav__item item__active' : 'nav__item'}>
                     <Link
                         to="/"
-                        className={location.pathname === '/' ? 'active' : ''}
+                        className='nav__link'
                     >
                         Главная
                     </Link>
                 </li>
-                <li>
+                <li className={location.pathname === '/technologies' ? 'nav__item item__active' : 'nav__item'}>
                     <Link
                         to="/technologies"
-                        className={location.pathname === '/technologies' ? 'active' : ''}
+                        className='nav__link'
                     >
                         Все технологии
                     </Link>
                 </li>
-                <li>
+                <li className={location.pathname === '/add-technology' ? 'nav__item item__active' : 'nav__item'}>
                     <Link
                         to="/add-technology"
-                        className={location.pathname === '/add-technology' ? 'active' : ''}
+                        className='nav__link'
                     >
                         Добавить технологию
                     </Link>
                 </li>
-                <li>
+                <li className={location.pathname === '/statistics' ? 'nav__item item__active' : 'nav__item'}>
                     <Link
                         to="/statistics"
-                        className={location.pathname === '/statistics' ? 'active' : ''}
+                        className='nav__link'
                     >
                         Статистика
                     </Link>
                 </li>
-                <li>
+                <li className={location.pathname === '/settings' ? 'nav__item item__active' : 'nav__item'}>
                     <Link
                         to="/settings"
-                        className={location.pathname === '/settings' ? 'active' : ''}
+                        className='nav__link'
                     >
                         Найстройки
                     </Link>

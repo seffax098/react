@@ -8,6 +8,7 @@ function TechnologyNotes({ notes, onNotesChange, techId }) {
             <textarea
                 value={notes}
                 onChange={(e) => onNotesChange(techId, e.target.value)}
+                onClick={(e) => e.stopPropagation()}
                 placeholder="Записывайте сюда важные моменты..."
                 rows="3"
             />

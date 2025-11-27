@@ -67,3 +67,14 @@
     width: 1.5em;
     line-height: 1;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--gap);
+}
+
+.link__details {
+    text-decoration: none;
+    color: var(--vg);
+}

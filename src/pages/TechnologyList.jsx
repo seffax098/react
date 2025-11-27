@@ -1,40 +1,19 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import Filters from "../components/Filters";
 
-function TechnologyList() {
-    const [technologies, setTechnologies] = useState([]);
-
-    useEffect(() => {
-        const saved = localStorage.getItem('technologies');
-        if (saved) {
-            setTechnologies(JSON.parse(saved));
-        }
-    }, []);
-
+function TechnologyList({technologies, onNotesChange, onStatusChange}) {
     return (
-        <div className="page">
-            <div className="page-header">
-                <h1>Все технологии</h1>
-                <Link to="/add-technology" className="btn btn-primary">
-                    + Добавить технологию
-                </Link>
+        <div className="technologies__page page">
+            <div className="page__header">
+                <h2 className='header__title'>Все технологии</h2>
             </div>
 
-            <div className="technologies-grid">
-                {technologies.map(tech => (
-                    <div key={tech.id} className="technology-item">
-                        <h3>{tech.title}</h3>
-                        <p>{tech.description}</p>
-                        <div className="technology-meta">
-                            <span className={`status status-${tech.status}`}>
-                                {tech.status}
-                            </span>
-                            <Link to={`/technology/${tech.id}`} className="btn-link">
-                                Подробнее →
-                            </Link>
-                        </div>
-                    </div>
-                ))}
+            <div className="technologies">
+                <Filters 
+                items={technologies}
+                onStatusChange={onStatusChange}
+                onNotesChange={onNotesChange}
+                />
             </div>
             
 

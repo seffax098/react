@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "React Components",
+    "description": "Изучение базовых компонентов и их композиции",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 2,
+    "title": "JSX Syntax",
+    "description": "Понимание синтаксиса JSX и отличий от обычного JavaScript",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 3,
+    "title": "State Management",
+    "description": "Работа с состоянием с помощью useState и других хуков",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 4,
+    "title": "Props и передача данных",
+    "description": "Передача данных между компонентами через props",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 5,
+    "title": "React Router",
+    "description": "Настройка маршрутизации и создание страниц в SPA",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 6,
+    "title": "Работа с формами",
+    "description": "Управляемые компоненты, обработка инпутов и отправка форм",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 7,
+    "title": "REST API Basics",
+    "description": "Отправка запросов к API, методы GET/POST/PUT/DELETE",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 8,
+    "title": "Асинхронность и useEffect",
+    "description": "Загрузка данных в React с помощью useEffect и fetch",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 9,
+    "title": "TypeScript Basics",
+    "description": "Основные типы, интерфейсы и типизация компонентов",
+    "status": "not-started",
+    "notes": ""
+  },
+  {
+    "id": 10,
+    "title": "Git и GitHub",
+    "description": "Базовые команды Git и работа с репозиторием на GitHub",
+    "status": "not-started",
+    "notes": ""
+  }
+]
