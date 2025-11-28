@@ -1,4 +1,3 @@
-// ProgressHeader.jsx
 import "./ProgressHeader.css";
 
 function ProgressHeader({ items = [] }) {

@@ -28,7 +28,6 @@ function QuickActions({ setTechnologies }) {
             const json = JSON.stringify(exportObject, null, 2);
             console.log("Exported data:", json);
 
-            // Скачивание файла:
             const blob = new Blob([json], { type: "application/json" });
             const url = URL.createObjectURL(blob);
 

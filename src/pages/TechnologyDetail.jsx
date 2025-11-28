@@ -16,7 +16,7 @@ function TechnologyDetail({ technologies, onStatusChange, onNotesChange }) {
                 <h1>Технология не найдена</h1>
                 <p>Технология с ID {techId} не существует.</p>
                 <Link to="/technologies" className="btn">
-                    ← Назад к списку
+                    Назад к списку
                 </Link>
             </div>
         );
@@ -26,7 +26,7 @@ function TechnologyDetail({ technologies, onStatusChange, onNotesChange }) {
         <div className="page">
             <div className="page-header">
                 <Link to="/technologies" className="back-link">
-                    ← Назад к списку
+                    Назад к списку
                 </Link>
                 <h1>{technology.title}</h1>
             </div>

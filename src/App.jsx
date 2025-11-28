@@ -9,27 +9,14 @@ import TechnologyDetail from "./pages/TechnologyDetail";
 import ProgressHeader from "./components/ProgressHeader";
 import QuickActions from "./components/QuickActions";
 import RoadmapImporter from "./components/RoadmapImporter";
-import useTechnologiesApi from "./hooks/useTechnologiesApi";
 import useTechnologies from "./hooks/useTechnologies";
 
 function App() {
     const {
         technologies,
         setTechnologies,
-        loading,
-        error,
-        refetch,
         addTechnology
-    } = useTechnologiesApi();
-
-    // const {
-    //     technologies,
-    //     setTechnologies,
-    //     loading,
-    //     error,
-    //     refetch,
-    //     addTechnology
-    // } = useTechnologies();
+    } = useTechnologies();
 
     const handleStatusChange = (id, newStatus) => {
         setTechnologies(prev =>
@@ -48,14 +35,6 @@ function App() {
     };
 
 
-    if (loading) {
-        return (
-            <div className="app-loading">
-                <p>Загрузка технологий...</p>
-            </div>
-        );
-    }
-
     return (
         <div className="container">
             <BrowserRouter>
@@ -63,12 +42,6 @@ function App() {
                     <Navigation />
 
                     <main className="main-content">
-                        {error && (
-                            <div className="app-error">
-                                <p>{error}</p>
-                                <button onClick={refetch}>Попробовать снова</button>
-                            </div>
-                        )}
 
                         <Routes>
                             <Route path="/" element={<Home />} />

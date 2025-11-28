@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Filters from "../components/Filters";
 
-function TechnologyList({technologies, onNotesChange, onStatusChange}) {
+function TechnologyList({ technologies, onNotesChange, onStatusChange }) {
     return (
         <div className="technologies__page page">
             <div className="page__header">
@@ -9,13 +9,13 @@ function TechnologyList({technologies, onNotesChange, onStatusChange}) {
             </div>
 
             <div className="technologies">
-                <Filters 
-                items={technologies}
-                onStatusChange={onStatusChange}
-                onNotesChange={onNotesChange}
+                <Filters
+                    items={technologies}
+                    onStatusChange={onStatusChange}
+                    onNotesChange={onNotesChange}
                 />
             </div>
-            
+
 
             {technologies.length === 0 && (
                 <div className="empty-state">

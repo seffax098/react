@@ -1,9 +1,23 @@
+import { useEffect } from 'react';
 import useLocalStorage from './useLocalStorage';
 
-const initialTechnologies = ".../public.json"
+const initialTechnologies = [];
 
 function useTechnologies() {
     const [technologies, setTechnologies] = useLocalStorage('technologies', initialTechnologies);
+
+    useEffect(() => {
+        if (!localStorage.getItem('technologies')) {
+            fetch('/technologies.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        setTechnologies(data);
+                    }
+                })
+                .catch(err => console.error('Ошибка загрузки technologies.json', err));
+        }
+    }, [setTechnologies]);
 
     const addTechnology = async (techData) => {
         const newTech = {
