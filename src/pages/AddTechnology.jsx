@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./AddTechnology.css";
 
 function AddTechnology({ addTechnology }) {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [success, setSuccess] = useState(false)
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -23,9 +23,10 @@ function AddTechnology({ addTechnology }) {
             "notes": ""
         });
 
-        alert("Успешно")
         setTitle("")
         setDescription("")
+        setSuccess(true)
+        setTimeout(() => setSuccess(false), 3000)
     }
 
     return (
@@ -64,6 +65,12 @@ function AddTechnology({ addTechnology }) {
                 >
                     Добавить
                 </button>
+                {success &&
+                    <div className="form__info">
+                        <p className="add__info">Технология успешно добавлена</p>
+                    </div>
+                }
+
             </form>
         </div>
     );

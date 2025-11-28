@@ -39,24 +39,28 @@ function TechnologyDetail({ technologies, onStatusChange, onNotesChange }) {
 
                 <div className="detail-section">
                     <h3>Статус изучения</h3>
+                    <div className='current-status'>
+                        <p>{technology.status === "not-started" ? "Не начато" :
+                            technology.status === "in-progress" ? "В процессе" : "Выполнено"}</p>
+                    </div>
                     <div className="status-buttons">
                         <button
                             onClick={() => onStatusChange(technology.id, 'not-started')}
-                            className={technology.status === 'not-started' ? 'active' : ''}
+                            className={technology.status === 'not-started' ? 'active status-button' : 'status-button'}
                         >
                             Не начато
                         </button>
                         <button
                             onClick={() => onStatusChange(technology.id, 'in-progress')}
-                            className={technology.status === 'in-progress' ? 'active' : ''}
+                            className={technology.status === 'in-progress' ? 'active status-button' : 'status-button'}
                         >
                             В процессе
                         </button>
                         <button
                             onClick={() => onStatusChange(technology.id, 'completed')}
-                            className={technology.status === 'completed' ? 'active' : ''}
+                            className={technology.status === 'completed' ? 'active status-button' : 'status-button'}
                         >
-                            Завершено
+                            Выполнено
                         </button>
                     </div>
                 </div>

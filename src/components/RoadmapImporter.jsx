@@ -1,70 +1,72 @@
 import { useState } from "react";
 import "./RoadmapImporter.css";
 
-function RoadmapImporter({ addTechnology }) {
+function RoadmapImporter({ setTechnologies }) {
     const [importing, setImporting] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+    const [success, setSuccess] = useState(false)
 
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-    };
+    const handleFileChange = (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
 
-    const handleImportRoadmap = async (roadmapUrl) => {
-        try {
-            setImporting(true);
-
-            const response = await fetch(roadmapUrl);
-
-            if (!response.ok) throw new Error("Не удалось загрузить дорожную карту");
-
-            const roadmapData = await response.json();
-
-            if (!Array.isArray(roadmapData.technologies)) {
-                throw new Error("Некорректный формат дорожной карты");
-            }
-
-
-            for (const tech of roadmapData.technologies) {
-                await addTechnology(tech);
-            }
-
-            alert(`Успешно импортировано ${roadmapData.technologies.length} технологий`);
-            setInputValue("")
-        } catch (err) {
-            alert(`Ошибка импорта: ${err.message}`);
-        } finally {
-            setImporting(false);
+        if (file.type !== "application/json" && !file.name.endsWith(".json")) {
+            alert("Пожалуйста, выберите файл в формате JSON");
+            event.target.value = "";
+            return;
         }
-    };
 
+        setImporting(true);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+        const reader = new FileReader();
 
-        await handleImportRoadmap(inputValue.trim());
+        reader.onload = () => {
+            try {
+                const text = reader.result;
+                const roadmapData = JSON.parse(text);
+
+                if (!Array.isArray(roadmapData.technologies)) {
+                    throw new Error("Некорректный формат дорожной карты (ожидается поле 'technologies' - массив)");
+                }
+
+                setTechnologies(roadmapData.technologies);
+
+                setSuccess(true)
+                setTimeout(() => setSuccess(false), 3000)
+                event.target.value = "";
+            } catch (err) {
+                alert(`Ошибка импорта: ${err.message}`);
+            } finally {
+                setImporting(false);
+            }
+        };
+
+        reader.onerror = () => {
+            alert("Не удалось прочитать файл");
+            setImporting(false);
+        };
+
+        reader.readAsText(file);
     };
 
     return (
         <div className="roadmap-importer">
             <h3>Импорт дорожной карты</h3>
 
-            <form className="import-tech" onSubmit={handleSubmit}>
+            <div className="import-tech">
                 <input
-                    type="url"
-                    placeholder="Ссылка на API"
-                    name="inputurl"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    required
-                />
-                <button
-                    type="submit"
+                    type="file"
+                    accept="application/json,.json"
+                    onChange={handleFileChange}
                     disabled={importing}
-                    className="import-button"
-                >
-                    {importing ? "Импорт..." : "Импорт пример дорожной карты"}
-                </button>
-            </form>
+                    className="input"
+                />
+                {importing && <span className="import-status">Импорт...</span>}
+                {success &&
+                    <div className="form__info">
+                        <p className="add__info">Технологии успешно импортированы</p>
+                    </div>
+                }
+            </div>
         </div>
     );
 }

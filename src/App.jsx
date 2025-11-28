@@ -10,6 +10,7 @@ import ProgressHeader from "./components/ProgressHeader";
 import QuickActions from "./components/QuickActions";
 import RoadmapImporter from "./components/RoadmapImporter";
 import useTechnologiesApi from "./hooks/useTechnologiesApi";
+import useTechnologies from "./hooks/useTechnologies";
 
 function App() {
     const {
@@ -20,6 +21,15 @@ function App() {
         refetch,
         addTechnology
     } = useTechnologiesApi();
+
+    // const {
+    //     technologies,
+    //     setTechnologies,
+    //     loading,
+    //     error,
+    //     refetch,
+    //     addTechnology
+    // } = useTechnologies();
 
     const handleStatusChange = (id, newStatus) => {
         setTechnologies(prev =>
@@ -91,7 +101,7 @@ function App() {
                                 element={
                                     <>
                                         <QuickActions setTechnologies={setTechnologies} />
-                                        <RoadmapImporter addTechnology={addTechnology} />
+                                        <RoadmapImporter setTechnologies={setTechnologies}/>
                                     </>
                                 }
                             />
